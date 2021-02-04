@@ -29,7 +29,7 @@ begin
 		select b.gid, coalesce(d.roadlength, 0) as roadlength
 		from buffers as b left join
 		(with intsct as (
-			select r.gid as road, b.gid, st_length(st_intersection(r.geom, b.b'|| i ||')) as length
+			select b.gid, st_length(st_intersection(r.geom, b.b'|| i ||')) as length
 			from '|| roads ||' as r, buffers as b
 			where st_intersects(r.geom, b.b'|| i ||')
 		)
